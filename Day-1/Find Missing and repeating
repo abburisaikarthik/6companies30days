@@ -1,0 +1,23 @@
+class Solve {
+    int[] findTwoElement(int arr[], long n) {
+        long sumn = n * (n + 1) / 2;
+        long squn = n * (n + 1) * ((2 * n) + 1) / 6;
+
+        long Asum = 0;
+        long Assum = 0;
+        for (long i : arr) {
+            Assum += (i * i);
+            Asum += i;
+        }
+
+        long sn = sumn - Asum; // x - y
+        long sqn = squn - Assum; // x^2 - y^2
+
+        long sumxy = sqn / sn; // x + y
+
+        long mis = (sumxy + sn) / 2; // (x + y + x - y) / 2 = x
+        long rep = mis - sn; // x - (x - y) = y
+
+        return new int[]{(int)rep, (int)mis};
+    }
+}
