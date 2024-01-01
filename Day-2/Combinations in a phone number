@@ -1,0 +1,27 @@
+// simple recursion 
+// key : to store the nums as strings in keys [] arr and accesing them
+class Solution {
+    static List<String> ans ;
+    static String keys[] ={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    public List<String> letterCombinations(String digits) 
+    {
+         ans = new ArrayList();
+         if(digits.equals(""))return ans;
+         helper(0,"",digits);
+         return ans;
+    }
+
+    void helper(int ind , String sub , String s)
+    {
+        if(ind>=s.length())
+        {
+            ans.add(sub);
+            return;
+        }
+        String letters = keys[s.charAt(ind)-'0'];
+        for(char i:letters.toCharArray())
+        {
+            helper(ind+1,sub+i,s);
+        }
+    }
+}
