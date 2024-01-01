@@ -1,0 +1,15 @@
+class DataStream {
+static int val , kk,cnt;
+    public DataStream(int value, int k) {
+        val =value;
+        kk=k;
+        cnt=0;
+    }
+    
+    public boolean consec(int num) 
+    {
+        if(num==val)cnt++;
+        else cnt=0;
+        return cnt>=kk;
+    }
+}
