@@ -1,28 +1,28 @@
-import java.util.ArrayList;
-import java.util.List;
+class Solution {
+	public int countDistinct(int[] nums, int k, int p) {
+		HashSet<String> hs = new HashSet<>();
 
-public class Solution {
-    private static final int MAX_P = 200;
+		for(int i=0; i<nums.length; ++i) {
+			int cnt = 0;
+			StringBuilder sb = new StringBuilder();
 
-    public int countDistinct(int[] nums, int k, int p) {
-        int n = nums.length;
-        List<int[]> child = new ArrayList<>();
-        child.add(new int[MAX_P + 1]);
-        int nxt = 1, ans = 0;
-        for (int i = 0; i < n; i++) {
-            int count = 0, node = 0;
-            int j = i;
-            while (j < n && count <= k) {
-                int c = nums[j++];
-                if (c % p == 0) if (count++ == k) break;
-                if (child.get(node)[c] == 0) {
-                    ans++;
-                    child.get(node)[c] = nxt++;
-                    child.add(new int[MAX_P + 1]);
-                }
-                node = child.get(node)[c];
-            }
-        }
-        return ans;
-    }
+			for(int j=i; j<nums.length; ++j) {
+
+				if(nums[j]%p == 0) {
+					cnt++;
+				}
+
+				if(cnt > k) {
+					break;
+				}
+
+				sb.append(nums[j] + ",");
+
+				hs.add(sb.toString());
+			}
+		}
+
+		return hs.size();
+	}
+
 }
