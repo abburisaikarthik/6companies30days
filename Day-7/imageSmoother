@@ -1,0 +1,28 @@
+class Solution {
+    public int[][] imageSmoother(int[][] img) 
+    {
+        int rows = img.length;
+        int cols = img[0].length;
+        int[][] result = new int[rows][cols];
+
+        for(int i = 0;i<rows;i++)
+        {
+            for(int j = 0 ; j<cols ;j++ )
+            {
+                int tot =0;
+                int cnt =0;
+                for(int x = Math.max(0,i-1);x<Math.min(rows,i+2);x++)
+                {
+                    for(int y= Math.max(0,j-1);y<Math.min(cols,j+2);y++)
+                    {
+                        tot+=img[x][y];
+                        cnt++;
+                    }
+                }
+                result[i][j] =tot/cnt;
+            }
+        }
+        return result;
+        
+    }
+}
