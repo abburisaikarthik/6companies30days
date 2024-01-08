@@ -1,0 +1,20 @@
+class Solution {
+    public int minMoves2(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        int m = (n % 2 == 0)? (nums[n/2] + nums[n/2-1]) / 2 : nums[n/2];
+        int ans = 0;    // to store our number of moves
+        // at each iteration, we would add the absolute distance 
+        // between the element and the median to ans variable
+        // the absolute difference is nothing but the number of moves
+        // a particular element has to make to reach the median
+        for (int i : nums) {
+            ans += Math.abs(i - m);
+        }
+
+        return ans;
+    }
+}
+
+// TC: O(n * logn) + O(n) => O(n * logn)
+// SC: O(1)
