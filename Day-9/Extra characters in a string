@@ -1,0 +1,31 @@
+class Solution {
+    int n;
+    public int minExtraChar(String s, String[] dictionary) {
+        n = s.length();
+        int[] memo = new int[n];
+        Arrays.fill(memo, -1);
+        Set<String> dict = new HashSet<>(Arrays.asList(dictionary));
+        return recurse(0, s, dict, memo);
+    }
+    int recurse(int start, String s, Set<String> dict, int[] memo) {
+        int n = s.length();
+        if(start == n) {
+            return 0;
+        }
+        if(memo[start]!=-1) {
+            return memo[start];
+        }
+        int localMin = Integer.MAX_VALUE;
+        for(int end=start+1; end<=n; end++) {
+            String cur = s.substring(start, end);
+            if(dict.contains(cur)) {
+                localMin = Math.min(localMin, recurse(end, s, dict, memo));
+            }
+            else {
+                
+                localMin = Math.min(localMin, end-start + recurse(end, s, dict, memo));
+            }
+        }
+        return memo[start] = localMin;
+    }
+}
